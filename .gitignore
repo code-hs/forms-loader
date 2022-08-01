@@ -1,0 +1,8 @@
+.idea/
+node_modules/
+public/img/parsers/
+.env
+package-lock.json
+config/*_config.json
+dist/
+
