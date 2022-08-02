@@ -5,16 +5,12 @@ export class Bundler {
 	 * Local by client site
 	 * @param {string} bundleName
 	 * @param {string} initContentPath
-	 * @returns {string}
 	 */
-	static getLocalUrl(bundleName, initContentPath) {
+	static getLocalUrl(bundleName: string, initContentPath: string): string {
 		return `${initContentPath}/${bundleName}`;
 	}
 
-	/**
-	 * @returns {string}
-	 */
-	static getFallbackUrl() {
+	static getFallbackUrl(): string {
 		return `${config.serverUrl}/p/bundles/${config.bundleName}`;
 	}
 }

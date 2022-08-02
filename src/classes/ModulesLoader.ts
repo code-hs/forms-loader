@@ -1,12 +1,14 @@
+import {Scheme, Module} from './structure';
+
 export class ModulesLoader {
-	static load(scheme) {
+	static load(scheme: Scheme) {
 		if (!scheme || !scheme.config || !scheme.config.modules) return;
 
 		const {modules} = scheme.config;
 		modules.forEach(module => this.loadModule(module));
 	}
 
-	static loadModule(module) {
+	static loadModule(module: Module) {
 		if (!module || !module.enable || !module.files) return;
 
 		const js = module.files.js || [];
@@ -14,18 +16,9 @@ export class ModulesLoader {
 
 		js.forEach(url => this.loadFile(url, 'js'));
 		css.forEach(url => this.loadFile(url, 'css'));
-
-		// "files": {
-		// 		"js": [
-		// 			"https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"
-		// 		],
-		// 		"css": [
-		// 			"https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker.min.css"
-		// 		]
-		// 	},
 	}
 
-	static loadFile(url, type) {
+	static loadFile(url: string, type: string) {
 		if (type === 'js') {
 			const script = document.createElement('script');
 			script.type = 'text/javascript';

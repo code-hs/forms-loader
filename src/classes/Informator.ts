@@ -1,11 +1,12 @@
 import {config} from '../config';
+import {Scheme, FormParams} from './structure';
 
 export class Informator {
 	/**
 	 * @param {string} projectId
 	 * @returns {Promise<{scheme: Object, bundleName: string, locales: Object}>}
 	 */
-	static async getFromApi(projectId) {
+	static async getFromApi(projectId: string) {
 		const url = `${config.serverUrl}/api/v1/public/form/init?projectId=${projectId}`;
 		const res = await fetch(url).then(response => response.json());
 
@@ -24,7 +25,7 @@ export class Informator {
 		return res.data;
 	}
 
-	static async loadFile(url) {
+	static async loadFile(url: string) {
 		return fetch(url).then(response => response.json());
 	}
 
@@ -32,7 +33,7 @@ export class Informator {
 	 * @param {string} initContentPath
 	 * @returns {Promise<{scheme: Object, bundleName: string, locales: Object}>}
 	 */
-	static async getFromFiles(initContentPath) {
+	static async getFromFiles(initContentPath: string) {
 		try {
 			const [scheme, locales] = await Promise.all([
 				this.loadFile(`${initContentPath}/scheme.json`),
@@ -55,7 +56,11 @@ export class Informator {
 	 * @param {boolean} useApi
 	 * @returns {Promise<{scheme: Object, bundleName: string, locales: Object}>}
 	 */
-	static async getStartedInfo({projectId, initContentPath, useApi}) {
+	static async getStartedInfo({
+		projectId,
+		initContentPath,
+		useApi,
+	}: FormParams) {
 		if (useApi && projectId) {
 			return this.getFromApi(projectId);
 		}

@@ -1,9 +1,10 @@
+import {Scheme, FormParams} from './structure';
+
 export class ParamsWorker {
 	/**
-	 * @param {Element} form
 	 * @returns {{initContentPath: string, useApi: boolean, page: string, projectId: string}}
 	 */
-	static get(form) {
+	static get(form: HTMLElement) {
 		const {projectId, page, path = '', useApi} = form.dataset;
 
 		return {
@@ -19,7 +20,7 @@ export class ParamsWorker {
 	 * @param {string} page
 	 * @param {boolean} useApi
 	 */
-	static validate({projectId, page, useApi}) {
+	static validate({projectId, page, useApi}: FormParams) {
 		if (!page) throw new Error('WDFL: Empty param page key');
 
 		if (useApi && !projectId) {

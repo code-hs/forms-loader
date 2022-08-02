@@ -5,6 +5,7 @@ import {Informator} from './classes/Informator';
 import {Bridge} from './classes/Bridge';
 import {ScriptInjector} from './classes/ScriptInjector';
 import {ModulesLoader} from './classes/ModulesLoader';
+import {Scheme, FormParams} from './classes/structure';
 
 // Widget Form Loader
 {
@@ -12,7 +13,7 @@ import {ModulesLoader} from './classes/ModulesLoader';
 		static async run() {
 			try {
 				FormWorker.deleteDuplicates();
-				const form = FormWorker.getForm();
+				const form: HTMLElement = FormWorker.getForm();
 				const {projectId, page, initContentPath, useApi} =
 					ParamsWorker.get(form);
 				ParamsWorker.validate({projectId, page, useApi});
@@ -33,5 +34,6 @@ import {ModulesLoader} from './classes/ModulesLoader';
 		}
 	}
 
+	//todo: move try to this function
 	WDFL.run();
 }

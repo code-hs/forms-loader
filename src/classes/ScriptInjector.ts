@@ -1,26 +1,27 @@
 import {config} from '../config';
 import {Bundler} from './Bundler';
 
+//todo: bundle injector ???
 export class ScriptInjector {
-	static handleError(error) {
+	static handleError(error: ErrorEvent): void {
 		// delete bad installed script
 		document.getElementById(config.idInHead).remove();
 		// inject fallback bundle
 		ScriptInjector.injectBundle(Bundler.getFallbackUrl());
 
-		console.warn(
-			`WDFL: Can't find bundle in local path: ${error.target.src}, automatically used bundle from %FORMNAME% server`
-		);
+		// @ts-ignore
+		const s = `WDFL: Can't find bundle in local path: ${error.target.src}, automatically used bundle from %FORMNAME% server`;
+		console.warn(s);
 	}
 
-	/**
-	 *
-	 * @param {string} bundleUrl
-	 * @param {function} errorCb
-	 */
-	static injectBundle(bundleUrl, errorCb = null) {
+	static injectBundle(
+		bundleUrl: string,
+		errorCb: OnErrorEventHandler = null
+	): void {
 		// don't inject script twice
-		const scriptInHead = document.getElementById(config.idInHead);
+		const scriptInHead: HTMLHeadElement = document.getElementById(
+			config.idInHead
+		);
 		if (scriptInHead) return;
 
 		const script = document.createElement('script');
@@ -29,6 +30,7 @@ export class ScriptInjector {
 		script.src = bundleUrl;
 		script.onerror = errorCb;
 
-		document.getElementsByTagName('head')[0].appendChild(script);
+		const head: HTMLHeadElement = document.getElementsByTagName('head')[0];
+		head.appendChild(script);
 	}
 }

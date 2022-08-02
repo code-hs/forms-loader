@@ -1,8 +1,11 @@
 import {config} from '../config';
 
 export class FormWorker {
-	static getForms() {
-		const forms = document.getElementsByTagName(config.widgetTag);
+	static getForms(): HTMLCollectionOf<HTMLElement> {
+		// @ts-ignore
+		const forms: HTMLCollectionOf<HTMLElement> = document.getElementsByTagName(
+			config.widgetTag
+		);
 		if (!forms || !forms.length) {
 			throw new Error(`WDFL: Not found any tag ${config.widgetTag}`);
 		}
@@ -24,11 +27,7 @@ export class FormWorker {
 		}
 	}
 
-	/**
-	 * get form element
-	 * @returns {Element} form tag
-	 */
-	static getForm() {
+	static getForm(): HTMLElement {
 		const forms = this.getForms();
 		return forms[0];
 	}
