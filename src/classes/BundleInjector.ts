@@ -1,40 +1,49 @@
-import {config} from '../config';
 import {Bundler} from './Bundler';
+
+class DOMWorker {
+	static key: 'widget-form-loader-script-bundle';
+
+	static hasScriptInHead(): boolean {
+		return !!document.getElementById(this.key);
+	}
+
+	static appendToHead(script: Element): void {
+		document.querySelector('head').append(script);
+	}
+
+	static removeFromHead(): void {
+		document.getElementById(this.key).remove();
+	}
+}
 
 export class BundleInjector {
 	static inject(initContentPath: string): void {
-		this.process(initContentPath);
+		// don't inject script twice
+		if (DOMWorker.hasScriptInHead()) return;
+
+		const bundleUrl: string = Bundler.getLocalUrl(initContentPath);
+		const script: HTMLScriptElement = this.generateScript(bundleUrl);
+
+		DOMWorker.appendToHead(script);
 	}
 
-	static process(initContentPath: string): void {
-		const bundleUrl: string = Bundler.getLocalUrl(
-			'form-widget-g.js',
-			initContentPath
-		);
-
-		// don't inject script twice
-		// todo: refact, add new function
-		const scriptInHead: HTMLHeadElement = document.getElementById(
-			config.idInHead
-		);
-		if (scriptInHead) return;
-
-		const script = document.createElement('script');
+	private static generateScript(bundleUrl: string): HTMLScriptElement {
+		const script: HTMLScriptElement = document.createElement('script');
 		script.type = 'text/javascript';
-		script.id = config.idInHead;
+		script.id = DOMWorker.key;
 		script.src = bundleUrl;
 		script.onerror = BundleInjector.handleError;
 
-		const head: HTMLHeadElement = document.getElementsByTagName('head')[0];
-		head.appendChild(script);
+		return script;
 	}
 
-	static handleError(error: ErrorEvent): void {
+	private static handleError(error: ErrorEvent): void {
 		// delete bad installed script
-		document.getElementById(config.idInHead).remove();
+		DOMWorker.removeFromHead();
 		// inject fallback bundle
 		BundleInjector.inject(Bundler.getFallbackUrl());
 
+		// todo: add server name to error message
 		// @ts-ignore
 		const s = `WDFL: Can't find bundle in local path: ${error.target.src}, automatically used bundle from %FORMNAME% server`;
 		console.warn(s);
