@@ -1,23 +1,13 @@
 import {config} from '../config';
 
+type HTMLForms = HTMLCollectionOf<HTMLElement>;
+
 export class FormWorker {
-	static getForms(): HTMLCollectionOf<HTMLElement> {
-		// @ts-ignore
-		const forms: HTMLCollectionOf<HTMLElement> = document.getElementsByTagName(
-			config.widgetTag
-		);
-		if (!forms || !forms.length) {
-			throw new Error(`WDFL: Not found any tag ${config.widgetTag}`);
-		}
-
-		return forms;
-	}
-
 	/**
 	 * delete  duplicated form tags
 	 */
 	static deleteDuplicates() {
-		const forms = this.getForms();
+		const forms: HTMLForms = this.getForms();
 
 		// delete form tags, save only one form
 		if (forms.length > 1) {
@@ -28,7 +18,17 @@ export class FormWorker {
 	}
 
 	static getForm(): HTMLElement {
-		const forms = this.getForms();
+		const forms: HTMLForms = this.getForms();
 		return forms[0];
+	}
+
+	private static getForms(): HTMLForms {
+		// @ts-ignore
+		const forms: HTMLForms = document.getElementsByTagName(config.widgetTag);
+		if (!forms || !forms.length) {
+			throw new Error(`WDFL: Not found any tag ${config.widgetTag}`);
+		}
+
+		return forms;
 	}
 }

@@ -4,7 +4,7 @@ import {Informator} from './classes/Informator';
 import {Bridge} from './classes/Bridge';
 import {BundleInjector} from './classes/BundleInjector';
 import {ModulesLoader} from './classes/ModulesLoader';
-import {FormParams} from './classes/structure';
+import {FormParams, StartedInfo} from './classes/structure';
 
 // Widget Form Loader
 {
@@ -16,7 +16,7 @@ import {FormParams} from './classes/structure';
 				ParamsWorker.get(form);
 			ParamsWorker.validate({projectId, page, useApi});
 
-			const {scheme, locales, bundleName} = await Informator.getStartedInfo({
+			const {scheme, locales}: StartedInfo = await Informator.getStartedInfo({
 				projectId,
 				initContentPath,
 				useApi,

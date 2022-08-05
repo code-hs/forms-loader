@@ -2,12 +2,10 @@ import {config} from '../config';
 
 export class Bundler {
 	/**
-	 * Local by client site
-	 * @param {string} bundleName
-	 * @param {string} initContentPath
+	 * From client side
 	 */
-	static getLocalUrl(bundleName: string, initContentPath: string): string {
-		return `${initContentPath}/${bundleName}`;
+	static getLocalUrl(initContentPath: string): string {
+		return `${initContentPath}/${config.bundleName}`;
 	}
 
 	static getFallbackUrl(): string {

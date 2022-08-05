@@ -1,16 +1,17 @@
 import {Scheme, Locales} from './structure';
-import {config} from '../config';
 
 export class Bridge {
+	private static storagePrefix: 'WDFL:init:';
+
 	/**
 	 * Save data to storage for use in bundle (on the client app)
 	 */
-	static send(scheme: Scheme, locales: Locales) {
-		this.saveToStorage(`${config.storagePrefix}scheme`, scheme);
-		this.saveToStorage(`${config.storagePrefix}locales`, locales);
+	static send(scheme: Scheme, locales: Locales): void {
+		this.saveToStorage(`${this.storagePrefix}scheme`, scheme);
+		this.saveToStorage(`${this.storagePrefix}locales`, locales);
 	}
 
-	static saveToStorage(key: string, data: object) {
+	private static saveToStorage(key: string, data: object): void {
 		const dataJson = JSON.stringify(data);
 		localStorage.setItem(key, dataJson);
 	}

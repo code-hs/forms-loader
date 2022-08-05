@@ -34,3 +34,9 @@ export interface FormParams {
 	useApi?: boolean;
 	initContentPath?: string;
 }
+
+// for bundle
+export interface StartedInfo {
+	scheme: Scheme;
+	locales: Locales;
+}

@@ -11,7 +11,7 @@
 		" ": "",
     "build": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
-		"_copy:widget-form-loader:to-api-public-dir": "copy dist\\widget-form-loader.min.js ..\\api\\public\\client\\bundles"
+		"_copy:widget-form-loader:to-api-public-dir": "copy dist\\widget-form-loader.min.js ..\\api\\public\\client"
 
   },
   "author": "",

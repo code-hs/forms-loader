@@ -1,36 +1,21 @@
 import {Bundler} from './Bundler';
-
-class DOMWorker {
-	static key: 'widget-form-loader-script-bundle';
-
-	static hasScriptInHead(): boolean {
-		return !!document.getElementById(this.key);
-	}
-
-	static appendToHead(script: Element): void {
-		document.querySelector('head').append(script);
-	}
-
-	static removeFromHead(): void {
-		document.getElementById(this.key).remove();
-	}
-}
+import {BundleInjectorDOM} from './BundleInjectorDOM';
 
 export class BundleInjector {
 	static inject(initContentPath: string): void {
 		// don't inject script twice
-		if (DOMWorker.hasScriptInHead()) return;
+		if (BundleInjectorDOM.hasScriptInHead()) return;
 
 		const bundleUrl: string = Bundler.getLocalUrl(initContentPath);
 		const script: HTMLScriptElement = this.generateScript(bundleUrl);
 
-		DOMWorker.appendToHead(script);
+		BundleInjectorDOM.appendToHead(script);
 	}
 
 	private static generateScript(bundleUrl: string): HTMLScriptElement {
 		const script: HTMLScriptElement = document.createElement('script');
 		script.type = 'text/javascript';
-		script.id = DOMWorker.key;
+		script.id = BundleInjectorDOM.key;
 		script.src = bundleUrl;
 		script.onerror = BundleInjector.handleError;
 
@@ -39,7 +24,7 @@ export class BundleInjector {
 
 	private static handleError(error: ErrorEvent): void {
 		// delete bad installed script
-		DOMWorker.removeFromHead();
+		BundleInjectorDOM.removeFromHead();
 		// inject fallback bundle
 		BundleInjector.inject(Bundler.getFallbackUrl());
 

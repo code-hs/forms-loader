@@ -1,26 +1,18 @@
-import {Scheme, FormParams} from './structure';
+import {FormParams} from './structure';
 
 export class ParamsWorker {
-	/**
-	 * @returns {{initContentPath: string, useApi: boolean, page: string, projectId: string}}
-	 */
-	static get(form: HTMLElement) {
-		const {projectId, page, path = '', useApi} = form.dataset;
+	static get(form: HTMLElement): FormParams {
+		const {projectId, page, path = ''} = form.dataset;
 
 		return {
 			projectId,
 			page,
 			initContentPath: path,
-			useApi: useApi === '',
+			useApi: 'useApi' in form.dataset,
 		};
 	}
 
-	/**
-	 * @param {string} projectId
-	 * @param {string} page
-	 * @param {boolean} useApi
-	 */
-	static validate({projectId, page, useApi}: FormParams) {
+	static validate({projectId, page, useApi}: FormParams): void {
 		if (!page) throw new Error('WDFL: Empty param page key');
 
 		if (useApi && !projectId) {
