@@ -3,7 +3,7 @@ import {ParamsWorker} from './classes/ParamsWorker';
 import {Bundler} from './classes/Bundler';
 import {Informator} from './classes/Informator';
 import {Bridge} from './classes/Bridge';
-import {ScriptInjector} from './classes/ScriptInjector';
+import {BundleInjector} from './classes/BundleInjector';
 import {ModulesLoader} from './classes/ModulesLoader';
 import {Scheme, FormParams} from './classes/structure';
 
@@ -14,7 +14,7 @@ import {Scheme, FormParams} from './classes/structure';
 			try {
 				FormWorker.deleteDuplicates();
 				const form: HTMLElement = FormWorker.getForm();
-				const {projectId, page, initContentPath, useApi} =
+				const {projectId, page, initContentPath, useApi}: FormParams =
 					ParamsWorker.get(form);
 				ParamsWorker.validate({projectId, page, useApi});
 
@@ -25,15 +25,13 @@ import {Scheme, FormParams} from './classes/structure';
 				});
 				ModulesLoader.load(scheme);
 				Bridge.send(scheme, locales);
-
-				const bundleUrl = Bundler.getLocalUrl(bundleName, initContentPath);
-				ScriptInjector.injectBundle(bundleUrl, ScriptInjector.handleError);
+				BundleInjector.inject(initContentPath);
 			} catch (e) {
 				console.error(e.message);
 			}
 		}
 	}
 
-	//todo: move try to this function
+	// todo: move try to this function
 	WDFL.run();
 }
