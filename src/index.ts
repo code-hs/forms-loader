@@ -1,8 +1,8 @@
 import {FormWorker} from './classes/FormWorker';
 import {ParamsWorker} from './classes/ParamsWorker';
-import {Informator} from './classes/Informator';
+import {Informator} from './classes/informator/Informator';
 import {Bridge} from './classes/Bridge';
-import {BundleInjector} from './classes/BundleInjector';
+import {BundleInjector} from './classes/bundleInjector/BundleInjector';
 import {ModulesLoader} from './classes/ModulesLoader';
 import {FormParams, StartedInfo} from './classes/structure';
 

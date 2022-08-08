@@ -1,4 +1,4 @@
-import {FormParams, StartedInfo} from './structure';
+import {FormParams, StartedInfo} from '../structure';
 import {InformatorAPI} from './InformatorAPI';
 import {InformatorFile} from './InformatorFile';
 

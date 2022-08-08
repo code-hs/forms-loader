@@ -1,4 +1,4 @@
-import {StartedInfo} from './structure';
+import {StartedInfo} from '../structure';
 
 export class InformatorFile {
 	static async get(initContentPath: string): Promise<StartedInfo> {

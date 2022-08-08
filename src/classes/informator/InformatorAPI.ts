@@ -1,5 +1,5 @@
-import {config} from '../config';
-import {StartedInfo} from './structure';
+import {config} from '../../config';
+import {StartedInfo} from '../structure';
 
 export class InformatorAPI {
 	static async get(projectId: string): Promise<StartedInfo> {
