@@ -1,4 +1,4 @@
-import {Bundler} from './Bundler';
+import {Bundler} from '../Bundler';
 import {BundleInjectorDOM} from './BundleInjectorDOM';
 
 export class BundleInjector {
@@ -8,11 +8,11 @@ export class BundleInjector {
 
 		if (!initContentPath) {
 			this.injectDefaultBundle();
+			return;
 		}
 
 		const bundleUrl: string = Bundler.getLocalUrl(initContentPath);
 		const script: HTMLScriptElement = this.generateScript(bundleUrl);
-
 		BundleInjectorDOM.appendToHead(script);
 	}
 
@@ -28,16 +28,20 @@ export class BundleInjector {
 
 	private static injectDefaultBundle(): void {
 		// inject fallback bundle
-		BundleInjector.inject(Bundler.getFallbackUrl());
+		const bundleUrl: string = Bundler.getFallbackUrl();
+		const script: HTMLScriptElement = this.generateScript(bundleUrl);
+		BundleInjectorDOM.appendToHead(script);
+
 		this.showWarn('');
 	}
 
 	private static handleError(error: ErrorEvent): void {
+		// this = event error object
 		// delete bad installed script
 		BundleInjectorDOM.removeFromHead();
-		this.injectDefaultBundle();
+		BundleInjector.injectDefaultBundle();
 		// @ts-ignore
-		this.showWarn(error.target.src);
+		BundleInjector.showWarn(error.target.src);
 	}
 
 	private static showWarn(localPath: string): void {
