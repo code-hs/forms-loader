@@ -9,6 +9,6 @@ export class Bundler {
 	}
 
 	static getFallbackUrl(): string {
-		return `${config.serverUrl}/p/bundles/${config.bundleName}`;
+		return `${config.serverUrl}/p/client/bundles/${config.bundleName}`;
 	}
 }
