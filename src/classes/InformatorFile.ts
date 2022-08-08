@@ -3,8 +3,8 @@ import {StartedInfo} from './structure';
 export class InformatorFile {
 	static async get(initContentPath: string): Promise<StartedInfo> {
 		const [scheme, locales] = await Promise.all([
-			this.loadFile(`${initContentPath}/scheme.json`),
-			this.loadFile(`${initContentPath}/locales.json`),
+			this.getData(`${initContentPath}/scheme.json`),
+			this.getData(`${initContentPath}/locales.json`),
 		]).catch(() => {
 			throw new Error(
 				`WDFL: Bad path in attr data-init-content-path or` +
@@ -15,7 +15,7 @@ export class InformatorFile {
 		return {scheme, locales};
 	}
 
-	private static async loadFile(url: string): Promise<any> {
+	private static async getData(url: string): Promise<any> {
 		return fetch(url).then(response => response.json());
 	}
 }
