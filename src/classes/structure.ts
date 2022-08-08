@@ -6,6 +6,10 @@ export interface Module {
 		css?: string[];
 	};
 	optionsForEachField?: object;
+	options?: {
+		global?: object;
+		forEachField?: object;
+	};
 }
 
 export interface Page {
@@ -31,8 +35,8 @@ export interface Locales {
 export interface FormParams {
 	projectId?: string;
 	page?: string;
-	useApi?: boolean;
-	initContentPath?: string;
+	useApi?: boolean; // where get thi StartedInfo. if true - use API, else - use file
+	initContentPath?: string; // using in BundleInjector as local path
 }
 
 // for bundle
