@@ -6,7 +6,7 @@ export class FormWorker {
 	/**
 	 * delete  duplicated form tags
 	 */
-	static deleteDuplicates() {
+	static deleteDuplicates(): void {
 		const forms: HTMLForms = this.getForms();
 
 		// delete form tags, save only one form
