@@ -4,7 +4,7 @@ import {BundleInjectorDOM} from './BundleInjectorDOM';
 export class BundleInjector {
 	static inject(initContentPath: string): void {
 		// don't inject script twice
-		if (BundleInjectorDOM.hasScriptInHead()) return;
+		if (BundleInjectorDOM.isLoaded()) return;
 
 		if (!initContentPath) {
 			this.injectDefaultBundle();
@@ -13,7 +13,7 @@ export class BundleInjector {
 
 		const bundleUrl: string = Bundler.getLocalUrl(initContentPath);
 		const script: HTMLScriptElement = this.generateScript(bundleUrl);
-		BundleInjectorDOM.appendToHead(script);
+		BundleInjectorDOM.append(script);
 	}
 
 	private static generateScript(bundleUrl: string): HTMLScriptElement {
@@ -22,6 +22,7 @@ export class BundleInjector {
 		script.id = BundleInjectorDOM.key;
 		script.src = bundleUrl;
 		script.onerror = BundleInjector.handleError;
+		script.async = false;
 
 		return script;
 	}
@@ -30,7 +31,7 @@ export class BundleInjector {
 		// inject fallback bundle
 		const bundleUrl: string = Bundler.getFallbackUrl();
 		const script: HTMLScriptElement = this.generateScript(bundleUrl);
-		BundleInjectorDOM.appendToHead(script);
+		BundleInjectorDOM.append(script);
 
 		this.showWarn('');
 	}
@@ -38,7 +39,7 @@ export class BundleInjector {
 	private static handleError(error: ErrorEvent): void {
 		// this = event error object
 		// delete bad installed script
-		BundleInjectorDOM.removeFromHead();
+		BundleInjectorDOM.remove();
 		BundleInjector.injectDefaultBundle();
 		// @ts-ignore
 		BundleInjector.showWarn(error.target.src);

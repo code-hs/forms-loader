@@ -1,15 +1,15 @@
 export class BundleInjectorDOM {
 	static key: 'widget-form-loader-script-bundle';
 
-	static hasScriptInHead(): boolean {
+	static isLoaded(): boolean {
 		return !!document.getElementById(this.key);
 	}
 
-	static appendToHead(script: Element): void {
-		document.querySelector('head').append(script);
+	static append(script: Element): void {
+		document.body.append(script);
 	}
 
-	static removeFromHead(): void {
+	static remove(): void {
 		document.getElementById(this.key).remove();
 	}
 }
