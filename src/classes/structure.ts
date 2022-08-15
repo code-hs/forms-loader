@@ -5,7 +5,6 @@ export interface Module {
 		js?: string[];
 		css?: string[];
 	};
-	optionsForEachField?: object;
 	options?: {
 		global?: object;
 		forEachField?: object;

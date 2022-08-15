@@ -23,13 +23,10 @@ class WDFL {
 		});
 		Bridge.send(scheme, locales);
 
-		ModulesLoader.load(scheme, () => {
-			// after load modules
-			BundleInjector.inject(initContentPath);
-		});
+		// added js files use async = false. Firstly load modules, then bundle
+		ModulesLoader.load(scheme);
+		BundleInjector.inject(initContentPath);
 	}
 }
 
-// @ts-ignore
-window.WDFL = WDFL;
 WDFL.run().catch(e => console.error(e));
