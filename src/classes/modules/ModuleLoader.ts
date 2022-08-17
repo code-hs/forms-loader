@@ -1,14 +1,33 @@
 import {Module} from '../structure';
 import {ModulesLoaderDOM} from './ModulesLoaderDOM';
 
+type ModuleFiles = {
+	js?: string[];
+	css?: string[];
+};
+type ModulesStore = {[key: string]: ModuleFiles};
+
 // noinspection JSMethodCanBeStatic
 export class ModuleLoader {
-	constructor(module: Module) {
-		if (!module || !module.files) return;
-		if (module.enable === false) return;
+	private static modulesFiles: ModulesStore = {
+		datepicker: {
+			js: [
+				'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js',
+			],
+			css: [
+				'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker.min.css',
+			],
+		},
+	};
 
-		const js: string[] = module.files.js || [];
-		const css: string[] = module.files.css || [];
+	constructor(module: Module) {
+		const moduleFiles = ModuleLoader.modulesFiles[module.name];
+		if (!moduleFiles) {
+			throw new Error(`ModuleLoader: Module ${module.name} not found`);
+		}
+
+		const js: string[] = moduleFiles.js || [];
+		const css: string[] = moduleFiles.css || [];
 
 		js.forEach((url: string) => this.loadFileJS(url));
 		css.forEach((url: string) => this.loadFileCSS(url));

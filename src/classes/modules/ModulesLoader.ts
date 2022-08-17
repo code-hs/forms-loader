@@ -6,6 +6,9 @@ export class ModulesLoader {
 		if (!scheme || !scheme.config || !scheme.config.modules) return;
 
 		scheme.config.modules.forEach((module: Module) => {
+			if (!module || !module.name) return;
+			if (module.enable === false) return;
+
 			new ModuleLoader(module);
 		});
 	}
