@@ -1,7 +1,7 @@
 import {Scheme, Locales} from './structure';
 
 export class Bridge {
-	private static storagePrefix: 'WDFL:init:';
+	private static storagePrefix = 'WDFL:init:';
 
 	/**
 	 * Save data to storage for use in bundle (on the client app)
