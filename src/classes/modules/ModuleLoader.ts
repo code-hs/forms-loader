@@ -1,11 +1,11 @@
-import {Module, Configurations} from '../structure';
+import {Module} from '../structure';
 import {DatepickerLoader} from './store/DatepickerLoader';
 
 export class ModuleLoader {
-	constructor(module: Module, config: Configurations) {
+	constructor(module: Module) {
 		switch (module.name) {
 			case 'datepicker':
-				DatepickerLoader.load(module, config);
+				DatepickerLoader.load(module);
 				break;
 			default:
 				throw new Error(`ModuleLoader: Module ${module.name} not found`);

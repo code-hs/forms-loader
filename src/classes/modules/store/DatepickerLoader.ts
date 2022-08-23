@@ -1,4 +1,5 @@
-import {Module, Configurations} from '../../structure';
+import {Store} from '../../Store';
+import {Module} from '../../structure';
 import {ModulesLoaderDOM} from '../ModulesLoaderDOM';
 
 export class DatepickerLoader {
@@ -13,7 +14,9 @@ export class DatepickerLoader {
 			'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/locales/',
 	};
 
-	static load(module: Module, config: Configurations): void {
+	static load(module: Module): void {
+		const {scheme} = Store;
+
 		this.files.js.forEach((url: string) => ModulesLoaderDOM.loadFileJS(url));
 		this.files.css.forEach((url: string) => ModulesLoaderDOM.loadFileCSS(url));
 	}
