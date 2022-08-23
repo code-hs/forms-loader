@@ -1,14 +1,25 @@
 export interface Module {
 	name: string;
 	enable: boolean;
-	files: {
-		js?: string[];
-		css?: string[];
-	};
 	options?: {
 		global?: object;
-		forEachField?: object;
 	};
+}
+
+export interface LocalizationConfig {
+	defaultLang?: string;
+	availableLangs?: string[];
+}
+/**
+ * {
+ *		defaultLang: "en"
+ *		availableLangs: ["en", "fr"]
+ * }
+ */
+
+export interface Configurations {
+	modules?: Module[];
+	localization?: LocalizationConfig;
 }
 
 export interface Page {
@@ -21,9 +32,7 @@ export interface Page {
 }
 
 export interface Scheme {
-	config: {
-		modules?: Module[];
-	};
+	config: Configurations;
 	pages: Page[];
 }
 

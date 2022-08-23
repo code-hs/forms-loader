@@ -9,7 +9,7 @@ export class ModulesLoader {
 			if (!module || !module.name) return;
 			if (module.enable === false) return;
 
-			new ModuleLoader(module);
+			new ModuleLoader(module, scheme.config);
 		});
 	}
 }

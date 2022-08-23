@@ -1,4 +1,4 @@
-import {Module} from '../structure';
+import {Module, Configurations} from '../structure';
 import {ModulesLoaderDOM} from './ModulesLoaderDOM';
 
 type ModuleFiles = {
@@ -20,7 +20,7 @@ export class ModuleLoader {
 		},
 	};
 
-	constructor(module: Module) {
+	constructor(module: Module, config: Configurations) {
 		const moduleFiles = ModuleLoader.modulesFiles[module.name];
 		if (!moduleFiles) {
 			throw new Error(`ModuleLoader: Module ${module.name} not found`);
