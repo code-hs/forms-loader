@@ -3,6 +3,7 @@ export interface Module {
 	enable: boolean;
 	options?: {
 		global?: object;
+		[key: string]: any;
 	};
 }
 
