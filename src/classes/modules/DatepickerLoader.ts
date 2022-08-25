@@ -1,42 +1,38 @@
-import {Store} from '../../Store';
-import {Module} from '../../structure';
-import {ModulesLoaderDOM} from '../ModulesLoaderDOM';
+import {Store} from '../Store';
+import {Module} from '../structure';
+import {DOMLoader} from './loader/DOMLoader';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
 };
+const subPath = 'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/';
 
 export class DatepickerLoader {
 	private static module: Module;
 	private static files = {
-		js: [
-			'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js',
-		],
-		css: [
-			'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker.min.css',
-		],
+		js: [subPath + 'js/datepicker-full.min.js'],
+		css: [subPath + 'css/datepicker.min.css'],
 	};
-	private static localesPath =
-		'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/locales/';
+	private static localesPath = subPath + 'js/locales/';
 
 	static load(module: Module): void {
 		this.module = module;
 		this.files.js.forEach((url: string, index) => {
 			// use cb once
 			if (index === 0) {
-				ModulesLoaderDOM.loadFileJS(url, () => {
+				DOMLoader.loadFileJS(url, () => {
 					this.loadLocales();
 				});
 			} else {
-				ModulesLoaderDOM.loadFileJS(url);
+				DOMLoader.loadFileJS(url);
 			}
 		});
-		this.files.css.forEach((url: string) => ModulesLoaderDOM.loadFileCSS(url));
+		this.files.css.forEach((url: string) => DOMLoader.loadFileCSS(url));
 	}
 
 	private static loadLocales(): void {
 		const localesPath: string[] = this.getLocalesPath();
-		localesPath.forEach((url: string) => ModulesLoaderDOM.loadFileJS(url));
+		localesPath.forEach((url: string) => DOMLoader.loadFileJS(url));
 	}
 
 	private static getLocalesPath(): string[] {

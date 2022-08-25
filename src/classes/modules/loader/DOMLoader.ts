@@ -1,4 +1,4 @@
-export class ModulesLoaderDOM {
+export class DOMLoader {
 	static loadFileJS(url: string, cb: Function = null): void {
 		if (!url) return;
 

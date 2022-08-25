@@ -1,5 +1,5 @@
-import {Module} from '../structure';
-import {DatepickerLoader} from './store/DatepickerLoader';
+import {Module} from '../../structure';
+import {DatepickerLoader} from '../DatepickerLoader';
 
 export class ModuleLoader {
 	constructor(module: Module) {

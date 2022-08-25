@@ -3,7 +3,7 @@ import {ParamsWorker} from './classes/ParamsWorker';
 import {Informator} from './classes/informator/Informator';
 import {Bridge} from './classes/Bridge';
 import {BundleInjector} from './classes/bundleInjector/BundleInjector';
-import {ModulesLoader} from './classes/modules/ModulesLoader';
+import {ModulesLoader} from './classes/modules/loader/ModulesLoader';
 import {FormParams, StartedInfo} from './classes/structure';
 import {Store} from './classes/Store';
 

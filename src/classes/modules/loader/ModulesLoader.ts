@@ -1,5 +1,5 @@
-import {Store} from '../Store';
-import {Module} from '../structure';
+import {Store} from '../../Store';
+import {Module} from '../../structure';
 import {ModuleLoader} from './ModuleLoader';
 
 export class ModulesLoader {
