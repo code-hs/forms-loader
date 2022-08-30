@@ -1,3 +1,6 @@
+// locales names
+// https://github.com/uxsolutions/bootstrap-datepicker/tree/master/dist/locales
+
 import {Store} from '../Store';
 import {Module} from '../structure';
 import {DOMLoader} from './loader/DOMLoader';
@@ -37,14 +40,24 @@ export class DatepickerLoader {
 
 	private static getLocalesPath(): string[] {
 		const relations: Relations = this.module.options.locales.relations;
-		const {scheme} = Store;
-		const availableLangs: string[] = scheme.config.localization.availableLangs;
-
+		const availableLangs: string[] = this.getAvailableLangs();
 		const relatedLangs: string[] = availableLangs.map(
 			(lang: string) => relations[lang] || lang
 		);
 
 		return relatedLangs.map((lang: string) => this.generatePathToLocale(lang));
+	}
+
+	static getAvailableLangs(): string[] {
+		const {scheme} = Store;
+		let availableLangs: string[] = scheme.config.localization.availableLangs;
+		const preInstalledLocale = 'en';
+
+		availableLangs = availableLangs.filter(
+			(lang: string) => lang !== preInstalledLocale
+		);
+
+		return availableLangs;
 	}
 
 	static generatePathToLocale(lang: string): string {
