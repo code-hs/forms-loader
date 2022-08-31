@@ -39,7 +39,7 @@ export class DatepickerLoader {
 	}
 
 	private static getLocalesPath(): string[] {
-		const relations: Relations = this.module.options.locales.relations;
+		const relations: Relations = this.module.options?.locales?.relations || {};
 		const availableLangs: string[] = this.getAvailableLangs();
 		const relatedLangs: string[] = availableLangs.map(
 			(lang: string) => relations[lang] || lang
@@ -50,7 +50,8 @@ export class DatepickerLoader {
 
 	static getAvailableLangs(): string[] {
 		const {scheme} = Store;
-		let availableLangs: string[] = scheme.config.localization.availableLangs;
+		let availableLangs: string[] =
+			scheme.config.localization?.availableLangs || [];
 		const preInstalledLocale = 'en';
 
 		availableLangs = availableLangs.filter(
