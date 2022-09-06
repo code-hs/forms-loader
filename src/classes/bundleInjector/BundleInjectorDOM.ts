@@ -1,5 +1,5 @@
 export class BundleInjectorDOM {
-	static key: 'widget-form-loader-script-bundle';
+	static key = 'widget-form-loader-script-bundle';
 
 	static isLoaded(): boolean {
 		return !!document.getElementById(this.key);
