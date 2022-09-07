@@ -25,7 +25,7 @@ export class DOMLoader {
 		this.append(container);
 	}
 
-	static append(element: Element): void {
+	private static append(element: Element): void {
 		document.body.append(element);
 	}
 }
