@@ -1,3 +1,5 @@
+import {config} from '../../../config';
+
 export class DOMLoader {
 	private readonly className: string;
 
@@ -34,10 +36,17 @@ export class DOMLoader {
 	}
 
 	private append(element: Element): void {
-		document.body.append(element);
+		const container = document.getElementById(config.filesContainerId);
+		container.append(element);
 	}
 
 	private getClassName(): string {
 		return `module-${this.className}`;
+	}
+
+	static initFilesContainer() {
+		const filesContainer = document.createElement('div');
+		filesContainer.id = config.filesContainerId;
+		document.body.append(filesContainer);
 	}
 }

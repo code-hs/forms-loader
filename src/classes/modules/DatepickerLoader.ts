@@ -18,7 +18,6 @@ export class DatepickerLoader {
 		js: [this.subPath + 'js/datepicker-full.min.js'],
 		css: [this.subPath + 'css/datepicker.min.css'],
 	};
-
 	private localesPath = this.subPath + 'js/locales/';
 
 	constructor(module: Module) {

@@ -1,12 +1,15 @@
+import {config} from '../../config';
+
 export class BundleInjectorDOM {
-	static key = 'widget-form-loader-script-bundle';
+	static key = 'main-bundle';
 
 	static isLoaded(): boolean {
 		return !!document.getElementById(this.key);
 	}
 
 	static append(script: Element): void {
-		document.body.append(script);
+		const container = document.getElementById(config.filesContainerId);
+		container.append(script);
 	}
 
 	static remove(): void {

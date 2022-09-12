@@ -6,6 +6,7 @@ import {BundleInjector} from './classes/bundleInjector/BundleInjector';
 import {ModulesLoader} from './classes/modules/loader/ModulesLoader';
 import {FormParams, StartedInfo} from './classes/structure';
 import {Store} from './classes/Store';
+import {DOMLoader} from './classes/modules/loader/DOMLoader';
 
 // Widget Form Loader
 class WDFL {
@@ -25,6 +26,7 @@ class WDFL {
 		Bridge.send(scheme, locales);
 		Store.scheme = scheme;
 
+		DOMLoader.initFilesContainer();
 		// added js files use async = false. Firstly load modules, then bundle
 		ModulesLoader.load();
 		BundleInjector.inject(initContentPath);
