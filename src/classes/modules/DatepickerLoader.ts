@@ -8,21 +8,25 @@ import {DOMLoader} from './loader/DOMLoader';
 type Relations = {
 	[langFromAvailableLangs: string]: string;
 };
-const subPath = 'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/';
 
 export class DatepickerLoader {
-	private static module: Module;
-	private static files = {
-		js: [subPath + 'js/datepicker-full.min.js'],
-		css: [subPath + 'css/datepicker.min.css'],
+	private module: Module;
+	private DOMLoaderO: DOMLoader;
+	private subPath =
+		'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/';
+	private files = {
+		js: [this.subPath + 'js/datepicker-full.min.js'],
+		css: [this.subPath + 'css/datepicker.min.css'],
 	};
-	private static localesPath = subPath + 'js/locales/';
-	private static DOMLoaderO: DOMLoader;
 
-	static load(module: Module): void {
+	private localesPath = this.subPath + 'js/locales/';
+
+	constructor(module: Module) {
 		this.module = module;
-		this.DOMLoaderO = new DOMLoader('datepicker');
+		this.DOMLoaderO = new DOMLoader(module.name);
+	}
 
+	load(): void {
 		this.files.js.forEach((url: string, index) => {
 			// use cb once
 			if (index === 0) {
@@ -36,12 +40,12 @@ export class DatepickerLoader {
 		this.files.css.forEach((url: string) => this.DOMLoaderO.loadFileCSS(url));
 	}
 
-	private static loadLocales(): void {
+	private loadLocales(): void {
 		const localesPath: string[] = this.getLocalesPath();
 		localesPath.forEach((url: string) => this.DOMLoaderO.loadFileJS(url));
 	}
 
-	private static getLocalesPath(): string[] {
+	private getLocalesPath(): string[] {
 		const relations: Relations = this.module.options?.locales?.relations || {};
 		const availableLangs: string[] = this.getAvailableLangs();
 		const relatedLangs: string[] = availableLangs.map(
@@ -51,7 +55,7 @@ export class DatepickerLoader {
 		return relatedLangs.map((lang: string) => this.generatePathToLocale(lang));
 	}
 
-	static getAvailableLangs(): string[] {
+	private getAvailableLangs(): string[] {
 		const {scheme} = Store;
 		let availableLangs: string[] =
 			scheme.config.localization?.availableLangs || [];
@@ -64,7 +68,7 @@ export class DatepickerLoader {
 		return availableLangs;
 	}
 
-	static generatePathToLocale(lang: string): string {
+	private generatePathToLocale(lang: string): string {
 		return this.localesPath + lang + '.min.js';
 	}
 }
