@@ -17,25 +17,28 @@ export class DatepickerLoader {
 		css: [subPath + 'css/datepicker.min.css'],
 	};
 	private static localesPath = subPath + 'js/locales/';
+	private static DOMLoaderO: DOMLoader;
 
 	static load(module: Module): void {
 		this.module = module;
+		this.DOMLoaderO = new DOMLoader('datepicker');
+
 		this.files.js.forEach((url: string, index) => {
 			// use cb once
 			if (index === 0) {
-				DOMLoader.loadFileJS(url, () => {
+				this.DOMLoaderO.loadFileJS(url, () => {
 					this.loadLocales();
 				});
 			} else {
-				DOMLoader.loadFileJS(url);
+				this.DOMLoaderO.loadFileJS(url);
 			}
 		});
-		this.files.css.forEach((url: string) => DOMLoader.loadFileCSS(url));
+		this.files.css.forEach((url: string) => this.DOMLoaderO.loadFileCSS(url));
 	}
 
 	private static loadLocales(): void {
 		const localesPath: string[] = this.getLocalesPath();
-		localesPath.forEach((url: string) => DOMLoader.loadFileJS(url));
+		localesPath.forEach((url: string) => this.DOMLoaderO.loadFileJS(url));
 	}
 
 	private static getLocalesPath(): string[] {

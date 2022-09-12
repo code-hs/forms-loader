@@ -1,11 +1,18 @@
 export class DOMLoader {
-	static loadFileJS(url: string, cb: Function = null): void {
+	private readonly className: string;
+
+	constructor(className: string = '') {
+		this.className = className;
+	}
+
+	loadFileJS(url: string, cb: Function = null): void {
 		if (!url) return;
 
 		const container: HTMLScriptElement = document.createElement('script');
 		container.type = 'text/javascript';
 		container.async = false;
 		container.src = url;
+		container.className = this.className;
 
 		// @ts-ignore
 		if (cb) container.onload = cb;
@@ -13,7 +20,7 @@ export class DOMLoader {
 		this.append(container);
 	}
 
-	static loadFileCSS(url: string): void {
+	loadFileCSS(url: string): void {
 		if (!url) return;
 
 		const container: HTMLLinkElement = document.createElement('link');
@@ -21,11 +28,12 @@ export class DOMLoader {
 		container.rel = 'stylesheet';
 		container.media = 'all';
 		container.href = url;
+		container.className = this.className;
 
 		this.append(container);
 	}
 
-	private static append(element: Element): void {
+	private append(element: Element): void {
 		document.body.append(element);
 	}
 }
