@@ -12,7 +12,7 @@ export class DOMLoader {
 		container.type = 'text/javascript';
 		container.async = false;
 		container.src = url;
-		container.className = this.className;
+		container.className = this.getClassName();
 
 		// @ts-ignore
 		if (cb) container.onload = cb;
@@ -28,12 +28,16 @@ export class DOMLoader {
 		container.rel = 'stylesheet';
 		container.media = 'all';
 		container.href = url;
-		container.className = this.className;
+		container.className = this.getClassName();
 
 		this.append(container);
 	}
 
 	private append(element: Element): void {
 		document.body.append(element);
+	}
+
+	private getClassName(): string {
+		return `module-${this.className}`;
 	}
 }
