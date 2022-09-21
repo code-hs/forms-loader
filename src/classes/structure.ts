@@ -1,7 +1,7 @@
 export interface Module {
 	name: string;
 	enable: boolean;
-	options?: {
+	config: {
 		global?: object;
 		[key: string]: any;
 	};

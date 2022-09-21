@@ -45,7 +45,7 @@ export class DatepickerLoader {
 	}
 
 	private getLocalesPath(): string[] {
-		const relations: Relations = this.module.options?.locales?.relations || {};
+		const relations: Relations = this.module.config?.locales?.relations || {};
 		const availableLangs: string[] = this.getAvailableLangs();
 		const relatedLangs: string[] = availableLangs.map(
 			(lang: string) => relations[lang] || lang
