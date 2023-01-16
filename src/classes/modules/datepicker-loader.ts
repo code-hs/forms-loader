@@ -1,9 +1,9 @@
 // locales names
 // https://github.com/uxsolutions/bootstrap-datepicker/tree/master/dist/locales
 
-import {Store} from '../Store';
+import {Store} from '../store';
 import {Module} from '../structure';
-import {DOMLoader} from './loader/DOMLoader';
+import {DomLoader} from './loader/dom-loader';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
@@ -11,7 +11,7 @@ type Relations = {
 
 export class DatepickerLoader {
 	private module: Module;
-	private DOMLoaderO: DOMLoader;
+	private DOMLoaderO: DomLoader;
 	private subPath =
 		'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/';
 	private files = {
@@ -22,7 +22,7 @@ export class DatepickerLoader {
 
 	constructor(module: Module) {
 		this.module = module;
-		this.DOMLoaderO = new DOMLoader(module.name);
+		this.DOMLoaderO = new DomLoader(module.name);
 	}
 
 	load(): void {

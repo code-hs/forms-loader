@@ -1,12 +1,12 @@
-import {FormWorker} from './classes/FormWorker';
-import {ParamsWorker} from './classes/ParamsWorker';
-import {Informator} from './classes/informator/Informator';
-import {Bridge} from './classes/Bridge';
-import {BundleInjector} from './classes/bundleInjector/BundleInjector';
-import {ModulesLoader} from './classes/modules/loader/ModulesLoader';
+import {FormWorker} from './classes/form-worker';
+import {ParamsWorker} from './classes/params-worker';
+import {Informator} from './classes/informator/informator';
+import {Bridge} from './classes/bridge';
+import {BundleInjector} from './classes/bundleInjector/bundle-injector';
+import {ModulesLoader} from './classes/modules/loader/modules-loader';
 import {FormParams, StartedInfo} from './classes/structure';
-import {Store} from './classes/Store';
-import {DOMLoader} from './classes/modules/loader/DOMLoader';
+import {Store} from './classes/store';
+import {DomLoader} from './classes/modules/loader/dom-loader';
 
 // Widget Form Loader
 class WDFL {
@@ -26,7 +26,7 @@ class WDFL {
 		Bridge.send(scheme, locales);
 		Store.scheme = scheme;
 
-		DOMLoader.initFilesContainer();
+		DomLoader.initFilesContainer();
 		// added js files use async = false. Firstly load modules, then bundle
 		ModulesLoader.load();
 		BundleInjector.inject(initContentPath);

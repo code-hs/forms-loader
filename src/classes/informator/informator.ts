@@ -1,6 +1,6 @@
 import {FormParams, StartedInfo} from '../structure';
-import {InformatorAPI} from './InformatorAPI';
-import {InformatorFile} from './InformatorFile';
+import {InformatorApi} from './informator-api';
+import {InformatorFile} from './informator-file';
 
 export class Informator {
 	static async getStartedInfo({
@@ -9,7 +9,7 @@ export class Informator {
 		useApi,
 	}: FormParams): Promise<StartedInfo> {
 		if (useApi && projectId) {
-			return InformatorAPI.get(projectId);
+			return InformatorApi.get(projectId);
 		}
 
 		return InformatorFile.get(initContentPath);

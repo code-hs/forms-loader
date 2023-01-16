@@ -1,6 +1,6 @@
-import {Store} from '../../Store';
+import {Store} from '../../store';
 import {Module} from '../../structure';
-import {ModuleLoader} from './ModuleLoader';
+import {ModuleLoader} from './module-loader';
 
 export class ModulesLoader {
 	static load(): void {

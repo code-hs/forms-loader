@@ -1,6 +1,6 @@
 import {config} from '../../../config';
 
-export class DOMLoader {
+export class DomLoader {
 	private readonly className: string;
 
 	constructor(className: string = '') {

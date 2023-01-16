@@ -1,10 +1,10 @@
-import {Bundler} from '../Bundler';
-import {BundleInjectorDOM} from './BundleInjectorDOM';
+import {Bundler} from '../bundler';
+import {BundleInjectorDom} from './bundle-injector-dom';
 
 export class BundleInjector {
 	static inject(initContentPath: string): void {
 		// don't inject script twice
-		if (BundleInjectorDOM.isLoaded()) return;
+		if (BundleInjectorDom.isLoaded()) return;
 
 		if (!initContentPath) {
 			this.injectDefaultBundle();
@@ -13,13 +13,13 @@ export class BundleInjector {
 
 		const bundleUrl: string = Bundler.getLocalUrl(initContentPath);
 		const script: HTMLScriptElement = this.generateScript(bundleUrl);
-		BundleInjectorDOM.append(script);
+		BundleInjectorDom.append(script);
 	}
 
 	private static generateScript(bundleUrl: string): HTMLScriptElement {
 		const script: HTMLScriptElement = document.createElement('script');
 		script.type = 'text/javascript';
-		script.id = BundleInjectorDOM.key;
+		script.id = BundleInjectorDom.key;
 		script.src = bundleUrl;
 		script.onerror = BundleInjector.handleError;
 		script.async = false;
@@ -31,7 +31,7 @@ export class BundleInjector {
 		// inject fallback bundle
 		const bundleUrl: string = Bundler.getFallbackUrl();
 		const script: HTMLScriptElement = this.generateScript(bundleUrl);
-		BundleInjectorDOM.append(script);
+		BundleInjectorDom.append(script);
 
 		this.showWarn('');
 	}
@@ -39,7 +39,7 @@ export class BundleInjector {
 	private static handleError(error: ErrorEvent): void {
 		// this = event error object
 		// delete bad installed script
-		BundleInjectorDOM.remove();
+		BundleInjectorDom.remove();
 		BundleInjector.injectDefaultBundle();
 		// @ts-ignore
 		BundleInjector.showWarn(error.target.src);

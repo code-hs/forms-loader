@@ -1,6 +1,6 @@
 import {config} from '../../config';
 
-export class BundleInjectorDOM {
+export class BundleInjectorDom {
 	static key = 'main-bundle';
 
 	static isLoaded(): boolean {
