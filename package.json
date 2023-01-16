@@ -7,12 +7,10 @@
     "doc": "doc"
   },
   "scripts": {
-		"build_&_copy": "npm run build && npm run _copy:widget-form-loader:to-api-public-dir",
+		"build_&_copy": "npm run build",
 		" ": "",
     "build": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch",
-		"_copy:widget-form-loader:to-api-public-dir": "copy dist\\widget-form-loader.min.js ..\\api\\public\\client"
-
+    "watch": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
