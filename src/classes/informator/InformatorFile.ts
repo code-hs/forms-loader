@@ -8,7 +8,7 @@ export class InformatorFile {
 		]).catch(() => {
 			throw new Error(
 				`WDFL: Bad path in attr data-init-content-path or` +
-					` can't find scheme.json or locales.json`
+					` can't find scheme.json or locales.json or can't parse json`
 			);
 		});
 
