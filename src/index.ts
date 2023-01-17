@@ -14,8 +14,7 @@ class WDFL {
 		FormWorker.deleteDuplicates();
 
 		const form: HTMLElement = FormWorker.getForm();
-		const {projectId, page, initContentPath, useApi}: FormParams =
-			ParamsWorker.get(form);
+		const {projectId, page, initContentPath, useApi, dev}: FormParams = ParamsWorker.get(form);
 		ParamsWorker.validate({projectId, page, useApi});
 
 		const {scheme, locales}: StartedInfo = await Informator.getStartedInfo({
@@ -29,7 +28,7 @@ class WDFL {
 		DomLoader.initFilesContainer();
 		// added js files use async = false. Firstly load modules, then bundle
 		ModulesLoader.load();
-		BundleInjector.inject(initContentPath);
+		BundleInjector.inject(initContentPath, dev);
 	}
 }
 

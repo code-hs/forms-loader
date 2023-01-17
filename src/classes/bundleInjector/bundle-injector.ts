@@ -2,7 +2,13 @@ import {Bundler} from '../bundler';
 import {BundleInjectorDom} from './bundle-injector-dom';
 
 export class BundleInjector {
-	static inject(initContentPath: string): void {
+	static inject(initContentPath: string, dev: boolean): void {
+		if (dev) {
+			// player, bundle - injected by vue serve
+			// don't inject twice
+			return;
+		}
+
 		// don't inject script twice
 		if (BundleInjectorDom.isLoaded()) return;
 

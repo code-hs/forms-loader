@@ -49,6 +49,7 @@ export interface FormParams {
 	useApi?: boolean;
 	// using in BundleInjector as local path
 	initContentPath?: string;
+	dev?: boolean;
 }
 
 // for bundle

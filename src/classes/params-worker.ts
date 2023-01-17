@@ -9,6 +9,7 @@ export class ParamsWorker {
 			page,
 			initContentPath: path,
 			useApi: 'useApi' in form.dataset,
+			dev: 'dev' in form.dataset,
 		};
 	}
 
