@@ -1,14 +1,9 @@
 {
-  "name": "my-webpack-project",
+  "name": "loader",
   "version": "1.0.0",
-  "description": "My webpack project",
+  "description": "widget form loader",
   "main": "index.js",
-  "directories": {
-    "doc": "doc"
-  },
   "scripts": {
-		"build_&_copy": "npm run build",
-		" ": "",
     "build": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch"
   },
