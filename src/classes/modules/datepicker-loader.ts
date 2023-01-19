@@ -12,8 +12,7 @@ type Relations = {
 export class DatepickerLoader {
 	private module: Module;
 	private DOMLoaderO: DomLoader;
-	private subPath =
-		'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/';
+	private subPath = 'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/';
 	private files = {
 		js: [this.subPath + 'js/datepicker-full.min.js'],
 		css: [this.subPath + 'css/datepicker.min.css'],
@@ -47,22 +46,17 @@ export class DatepickerLoader {
 	private getLocalesPath(): string[] {
 		const relations: Relations = this.module.config?.locales?.relations || {};
 		const availableLangs: string[] = this.getAvailableLangs();
-		const relatedLangs: string[] = availableLangs.map(
-			(lang: string) => relations[lang] || lang
-		);
+		const relatedLangs: string[] = availableLangs.map((lang: string) => relations[lang] || lang);
 
 		return relatedLangs.map((lang: string) => this.generatePathToLocale(lang));
 	}
 
 	private getAvailableLangs(): string[] {
 		const {scheme} = Store;
-		let availableLangs: string[] =
-			scheme.config.localization?.availableLangs || [];
+		let availableLangs: string[] = scheme.config.localization?.availableLangs || [];
 		const preInstalledLocale = 'en';
 
-		availableLangs = availableLangs.filter(
-			(lang: string) => lang !== preInstalledLocale
-		);
+		availableLangs = availableLangs.filter((lang: string) => lang !== preInstalledLocale);
 
 		return availableLangs;
 	}
