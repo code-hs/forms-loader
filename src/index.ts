@@ -2,7 +2,7 @@ import {FormWorker} from './classes/form-worker';
 import {ParamsWorker} from './classes/params-worker';
 import {Informator} from './classes/informator/informator';
 import {Bridge} from './classes/bridge';
-import {BundleInjector} from './classes/bundleInjector/bundle-injector';
+import {BundleInjector} from './classes/bundle-injector/bundle-injector';
 import {ModulesLoader} from './classes/modules/loader/modules-loader';
 import {FormParams, StartedInfo} from './classes/structure';
 import {Store} from './classes/store';
