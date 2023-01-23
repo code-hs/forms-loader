@@ -12,7 +12,6 @@ export class DomLoader {
 
 		const container: HTMLScriptElement = document.createElement('script');
 		container.type = 'text/javascript';
-		container.async = false;
 		container.src = url;
 		container.className = this.getClassName();
 

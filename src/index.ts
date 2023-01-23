@@ -26,7 +26,6 @@ class WDFL {
 		Store.scheme = scheme;
 
 		DomLoader.initFilesContainer();
-		// added js files use async = false. Firstly load modules, then bundle
 		ModulesLoader.load();
 		BundleInjector.inject(initContentPath, dev);
 	}

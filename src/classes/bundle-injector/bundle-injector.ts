@@ -28,7 +28,6 @@ export class BundleInjector {
 		script.id = BundleInjectorDom.key;
 		script.src = bundleUrl;
 		script.onerror = BundleInjector.handleError;
-		script.async = false;
 
 		return script;
 	}
