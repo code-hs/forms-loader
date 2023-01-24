@@ -42,13 +42,13 @@ export interface Locales {
 }
 
 export interface FormParams {
-	projectId?: string;
-	page?: string;
+	projectId: string;
+	page: string;
+	// using in BundleInjector as local path
+	initContentPath?: string;
 	// where get the StartedInfo.
 	// if true - use API, else - use file
 	useApi?: boolean;
-	// using in BundleInjector as local path
-	initContentPath?: string;
 	dev?: boolean;
 }
 
