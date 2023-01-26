@@ -7,16 +7,27 @@ export class ParamsWorker {
 		return {
 			projectId,
 			page,
+			// using in BundleInjector as local path.
+			// path for get files (scheme.json, locales.json)
 			initContentPath: path,
+
+			// boolean value
+			// used in Informator.getStartedInfo()
 			useApi: 'useApi' in form.dataset,
+
+			// boolean value
+			// used in BundleInjector.inject
 			dev: 'dev' in form.dataset,
 		};
 	}
 
 	static validate({projectId, page, useApi}: FormParams): void {
+		// if prop data-page don't set, what need to print ?
+		// nothing, exception start
 		if (!page) throw new Error('WDFL: Empty param page key');
 
 		if (useApi && !projectId) {
+			// if set param useApi -> need set project-id!!
 			throw new Error('WDFL: Empty attribute data-project-id');
 		}
 	}

@@ -9,10 +9,9 @@ export class Informator {
 		initContentPath,
 		useApi,
 	}: InformatorProps): Promise<StartedInfo> {
-		if (useApi && projectId) {
-			return InformatorApi.get(projectId);
-		}
+		if (useApi) return InformatorApi.get(projectId);
 
+		// main direction
 		return InformatorFile.get(initContentPath);
 	}
 }

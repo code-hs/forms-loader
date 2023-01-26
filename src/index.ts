@@ -11,18 +11,24 @@ import {DomLoader} from './classes/modules/loader/dom-loader';
 // Widget Form Loader
 class WDFL {
 	static async run() {
+		// delete duplicated tags in html
 		FormWorker.deleteDuplicates();
 
 		const form: HTMLElement = FormWorker.getForm();
+		// get params from html form in attributes
 		const {projectId, page, initContentPath, useApi, dev}: FormParams = ParamsWorker.get(form);
+		// check options
 		ParamsWorker.validate({projectId, page, useApi});
 
+		// get information (scheme, locales) for inject modules
 		const {scheme, locales}: StartedInfo = await Informator.getStartedInfo({
 			projectId,
 			initContentPath,
 			useApi,
 		});
+		// send data to the widget app (Player)
 		Bridge.send(scheme, locales);
+		// save scheme in store, for will use in init modules
 		Store.scheme = scheme;
 
 		DomLoader.initFilesContainer();

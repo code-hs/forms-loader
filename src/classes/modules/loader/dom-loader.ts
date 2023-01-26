@@ -45,7 +45,9 @@ export class DomLoader {
 
 	static initFilesContainer() {
 		const filesContainer = document.createElement('div');
+		// filesContainerId - used for append files in container
 		filesContainer.id = config.filesContainerId;
+		// add container to body bottom
 		document.body.append(filesContainer);
 	}
 }
