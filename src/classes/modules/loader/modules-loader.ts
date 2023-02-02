@@ -13,6 +13,7 @@ export class ModulesLoader {
 		scheme.config.modules.forEach((module: Module) => {
 			// check if module enable
 			if (!module || !module.name) return;
+			// noinspection PointlessBooleanExpressionJS
 			if (module.enable === false) return;
 
 			new ModuleLoader(module);

@@ -8,11 +8,12 @@ export class BundleInjectorDom {
 	}
 
 	static append(script: Element): void {
-		const container = document.getElementById(config.filesContainerId);
+		const container = document.getElementById(config.filesContainerId) as HTMLElement;
 		container.append(script);
 	}
 
 	static remove(): void {
+		// @ts-ignore
 		document.getElementById(this.key).remove();
 	}
 }

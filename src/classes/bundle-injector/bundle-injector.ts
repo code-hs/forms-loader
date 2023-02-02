@@ -2,7 +2,7 @@ import {Bundler} from '../bundler';
 import {BundleInjectorDom} from './bundle-injector-dom';
 
 export class BundleInjector {
-	static inject(initContentPath: string, dev: boolean): void {
+	static inject(initContentPath: string | undefined, dev: boolean | undefined): void {
 		if (dev) {
 			// player, bundle - injected by vue serve
 			// don't inject twice
@@ -27,6 +27,7 @@ export class BundleInjector {
 		script.type = 'text/javascript';
 		script.id = BundleInjectorDom.key;
 		script.src = bundleUrl;
+		//@ts-ignore
 		script.onerror = BundleInjector.handleError;
 
 		return script;
@@ -41,7 +42,7 @@ export class BundleInjector {
 		this.showWarn('');
 	}
 
-	private static handleError(error: ErrorEvent): void {
+	private static handleError(error: ErrorEvent) {
 		// this = event error object
 		// delete bad installed script
 		BundleInjectorDom.remove();

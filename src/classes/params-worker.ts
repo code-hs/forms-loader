@@ -5,8 +5,8 @@ export class ParamsWorker {
 		const {projectId, page, path = ''} = form.dataset;
 
 		return {
-			projectId,
-			page,
+			projectId: projectId as string,
+			page: page as string,
 			// using in BundleInjector as local path.
 			// path for get files (scheme.json, locales.json)
 			initContentPath: path,

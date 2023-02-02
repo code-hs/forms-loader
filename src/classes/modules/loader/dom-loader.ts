@@ -7,7 +7,7 @@ export class DomLoader {
 		this.className = className;
 	}
 
-	loadFileJS(url: string, cb: Function = null): void {
+	loadFileJS(url: string, cb: Function | null = null): void {
 		if (!url) return;
 
 		const container: HTMLScriptElement = document.createElement('script');
@@ -35,7 +35,7 @@ export class DomLoader {
 	}
 
 	private append(element: Element): void {
-		const container = document.getElementById(config.filesContainerId);
+		const container = document.getElementById(config.filesContainerId) as HTMLElement;
 		container.append(element);
 	}
 

@@ -1,7 +1,7 @@
 import {StartedInfo} from '../structure';
 
 export class InformatorFile {
-	static async get(initContentPath: string): Promise<StartedInfo> {
+	static async get(initContentPath: string = ''): Promise<StartedInfo> {
 		// Request to two files
 		const [scheme, locales] = await Promise.all([
 			this.getData(`${initContentPath}/scheme.json`),
