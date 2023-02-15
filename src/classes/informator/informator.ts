@@ -1,4 +1,4 @@
-import {FormParams, StartedInfo} from '../structure';
+import {FormParams, StartedInfo} from '../types';
 import {InformatorApi} from './informator-api';
 import {InformatorFile} from './informator-file';
 type InformatorProps = Omit<FormParams, 'page'>;

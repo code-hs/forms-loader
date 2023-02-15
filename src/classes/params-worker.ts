@@ -1,4 +1,4 @@
-import {FormParams} from './structure';
+import {FormParams} from './types';
 
 export class ParamsWorker {
 	static get(form: HTMLElement): FormParams {

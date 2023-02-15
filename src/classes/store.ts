@@ -1,4 +1,4 @@
-import {Scheme} from './structure';
+import {Scheme} from './types';
 
 export class Store {
 	static scheme: Scheme;

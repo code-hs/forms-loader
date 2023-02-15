@@ -4,7 +4,7 @@ import {Informator} from './classes/informator/informator';
 import {Bridge} from './classes/bridge';
 import {BundleInjector} from './classes/bundle-injector/bundle-injector';
 import {ModulesLoader} from './classes/modules/loader/modules-loader';
-import {FormParams, StartedInfo} from './classes/structure';
+import {FormParams, StartedInfo} from './classes/types';
 import {Store} from './classes/store';
 import {DomLoader} from './classes/modules/loader/dom-loader';
 
