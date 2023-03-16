@@ -10,6 +10,8 @@ export class ModuleLoader {
 				const moduleItem = new DatepickerLoader(module);
 				moduleItem.load();
 				break;
+			case 'menu':
+				break;
 			default:
 				throw new Error(`ModuleLoader: Module ${module.name} not found`);
 		}
