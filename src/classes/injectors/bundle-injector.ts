@@ -1,8 +1,9 @@
 import {Bundler} from '../bundler';
 import {BundleInjectorDom} from './bundle-injector-dom';
+import {FormParams} from '../types';
 
 export class BundleInjector {
-	static inject(initContentPath: string | undefined, dev: boolean | undefined): void {
+	static inject({initContentPath, dev}: FormParams): void {
 		if (dev) {
 			// player, bundle - injected by vue serve
 			// don't inject twice

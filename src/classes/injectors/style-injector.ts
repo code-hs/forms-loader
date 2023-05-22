@@ -1,7 +1,8 @@
 import {MainInjectorDom} from './main-injector-dom';
+import {FormParams} from '../types';
 
 export class StyleInjector {
-	static inject(initContentPath: string | undefined, dev: boolean | undefined): void {
+	static inject({initContentPath, dev}: FormParams): void {
 		if (dev) {
 			// player, styles - injected by vue serve
 			// don't inject twice

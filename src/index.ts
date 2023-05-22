@@ -17,16 +17,12 @@ class WDFL {
 
 		const form: HTMLElement = FormWorker.getForm();
 		// get params from html form in attributes
-		const {projectId, page, initContentPath, useApi, dev}: FormParams = ParamsWorker.get(form);
+		const params: FormParams = ParamsWorker.get(form);
 		// check options
-		ParamsWorker.validate({projectId, page, initContentPath, useApi, dev});
+		ParamsWorker.validate(params);
 
 		// get information (scheme, locales) for inject modules
-		const {scheme, locales}: StartedInfo = await Informator.getStartedInfo({
-			projectId,
-			initContentPath,
-			useApi,
-		});
+		const {scheme, locales}: StartedInfo = await Informator.getStartedInfo(params);
 		// send data to the widget app (Player)
 		Bridge.send(scheme, locales);
 		// save scheme in store, for will use in init modules
@@ -34,8 +30,8 @@ class WDFL {
 
 		DomLoader.initFilesContainer();
 		ModulesLoader.load();
-		BundleInjector.inject(initContentPath, dev);
-		StyleInjector.inject(initContentPath, dev);
+		BundleInjector.inject(params);
+		StyleInjector.inject(params);
 	}
 }
 
