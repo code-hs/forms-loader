@@ -4,9 +4,10 @@ import {Informator} from './classes/informator/informator';
 import {Bridge} from './classes/bridge';
 import {BundleInjector} from './classes/injectors/bundle-injector';
 import {ModulesLoader} from './classes/modules/loader/modules-loader';
-import {FormParams, StartedInfo} from './classes/types';
+import type {FormParams, StartedInfo} from './classes/types';
 import {Store} from './classes/store';
 import {DomLoader} from './classes/modules/loader/dom-loader';
+import {StyleInjector} from './classes/injectors/style-injector';
 
 // Widget Form Loader
 class WDFL {
@@ -18,7 +19,7 @@ class WDFL {
 		// get params from html form in attributes
 		const {projectId, page, initContentPath, useApi, dev}: FormParams = ParamsWorker.get(form);
 		// check options
-		ParamsWorker.validate({projectId, page, useApi});
+		ParamsWorker.validate({projectId, page, initContentPath, useApi});
 
 		// get information (scheme, locales) for inject modules
 		const {scheme, locales}: StartedInfo = await Informator.getStartedInfo({
@@ -34,6 +35,7 @@ class WDFL {
 		DomLoader.initFilesContainer();
 		ModulesLoader.load();
 		BundleInjector.inject(initContentPath, dev);
+		StyleInjector.inject(initContentPath, dev);
 	}
 }
 
