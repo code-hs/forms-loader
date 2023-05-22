@@ -19,7 +19,7 @@ class WDFL {
 		// get params from html form in attributes
 		const {projectId, page, initContentPath, useApi, dev}: FormParams = ParamsWorker.get(form);
 		// check options
-		ParamsWorker.validate({projectId, page, initContentPath, useApi});
+		ParamsWorker.validate({projectId, page, initContentPath, useApi, dev});
 
 		// get information (scheme, locales) for inject modules
 		const {scheme, locales}: StartedInfo = await Informator.getStartedInfo({

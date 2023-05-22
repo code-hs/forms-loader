@@ -1,4 +1,4 @@
-import {FormParams} from './types';
+import type {FormParams} from './types';
 
 export class ParamsWorker {
 	static get(form: HTMLElement): FormParams {
@@ -21,10 +21,12 @@ export class ParamsWorker {
 		};
 	}
 
-	static validate({projectId, page, useApi}: FormParams): void {
+	static validate({projectId, page, initContentPath, useApi, dev}: FormParams): void {
 		// if prop data-page don't set, what need to print ?
 		// nothing, exception start
 		if (!page) throw new Error('WDFL: Empty param page key');
+
+		if (!initContentPath && !dev) throw new Error('WDFL: Empty param data-path');
 
 		if (useApi && !projectId) {
 			// if set param useApi -> need set project-id!!
