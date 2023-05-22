@@ -1,4 +1,4 @@
-import {Module} from '../../types';
+import type {Module} from '../../types';
 import {DatepickerLoader} from '../datepicker-loader';
 
 export class ModuleLoader {

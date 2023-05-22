@@ -1,4 +1,4 @@
-import {StartedInfo} from '../types';
+import type {StartedInfo} from '../types';
 
 export class InformatorFile {
 	static async get(initContentPath: string = ''): Promise<StartedInfo> {

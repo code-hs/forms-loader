@@ -1,4 +1,4 @@
-import {Scheme, Locales} from './types';
+import type {Scheme, Locales} from './types';
 
 export class Bridge {
 	private static storagePrefix = 'WDFL:init:';

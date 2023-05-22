@@ -4,7 +4,7 @@
 // https://mymth.github.io/vanillajs-datepicker/
 
 import {Store} from '../store';
-import {Module} from '../types';
+import type {Module} from '../types';
 import {DomLoader} from './loader/dom-loader';
 
 type Relations = {

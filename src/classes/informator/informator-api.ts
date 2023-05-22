@@ -1,5 +1,5 @@
 import {config} from '../../config';
-import {StartedInfo} from '../types';
+import type {StartedInfo} from '../types';
 
 export class InformatorApi {
 	static async get(projectId: string): Promise<StartedInfo> {
