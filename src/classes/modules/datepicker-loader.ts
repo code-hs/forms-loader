@@ -15,7 +15,7 @@ export class DatepickerLoader {
 	private module: Module;
 	private DOMLoaderO: DomLoader; // DomLoader Object
 	// part of path to datepicker files
-	private subPath = 'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/';
+	private subPath = 'https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.2/dist/';
 	// files list
 	private files = {
 		js: [this.subPath + 'js/datepicker-full.min.js'],
